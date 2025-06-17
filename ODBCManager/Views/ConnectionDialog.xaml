@@ -1,0 +1,85 @@
+﻿<mah:MetroWindow x:Class="ODBCManager.Views.ConnectionDialog"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 Title="Neue ODBC-Verbindung erstellen" 
+                 Height="500" 
+                 Width="600"
+                 WindowStartupLocation="CenterOwner"
+                 ResizeMode="NoResize">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+            <iconPacks:PackIconFontAwesome Kind="DatabaseSolid" Width="24" Height="24" Margin="0,0,10,0" VerticalAlignment="Center"/>
+            <TextBlock Text="Neue ODBC-Verbindung konfigurieren" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Form -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Name -->
+                <TextBlock Text="Verbindungsname*" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox Name="NameTextBox" Margin="0,0,0,15" Height="30"/>
+
+                <!-- Driver -->
+                <TextBlock Text="ODBC-Treiber*" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ComboBox Name="DriverComboBox" 
+                          ItemsSource="{Binding Drivers}"
+                          DisplayMemberPath="Name"
+                          Margin="0,0,0,15" 
+                          Height="30"/>
+
+                <!-- Architecture -->
+                <TextBlock Text="Architektur*" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ComboBox Name="ArchitectureComboBox" Margin="0,0,0,15" Height="30" SelectedIndex="1">
+                    <ComboBoxItem Content="32-Bit"/>
+                    <ComboBoxItem Content="64-Bit"/>
+                </ComboBox>
+
+                <!-- Server -->
+                <TextBlock Text="Server/Hostname*" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox Name="ServerTextBox" Margin="0,0,0,15" Height="30"/>
+
+                <!-- Database -->
+                <TextBlock Text="Datenbank" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox Name="DatabaseTextBox" Margin="0,0,0,15" Height="30"/>
+
+                <!-- Description -->
+                <TextBlock Text="Beschreibung" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox Name="DescriptionTextBox" 
+                         Margin="0,0,0,15" 
+                         Height="60" 
+                         TextWrapping="Wrap" 
+                         AcceptsReturn="True" 
+                         VerticalScrollBarVisibility="Auto"/>
+
+                <TextBlock Text="* Pflichtfelder" FontStyle="Italic" Foreground="Gray" Margin="0,10,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Name="CreateButton" 
+                    Content="Erstellen" 
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                    Width="100" 
+                    Height="35" 
+                    Margin="0,0,10,0"
+                    Click="CreateButton_Click"/>
+            <Button Name="CancelButton" 
+                    Content="Abbrechen" 
+                    Style="{StaticResource MahApps.Styles.Button.Square}"
+                    Width="100" 
+                    Height="35"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
